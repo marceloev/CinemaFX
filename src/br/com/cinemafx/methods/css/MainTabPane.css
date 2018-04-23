@@ -1,0 +1,53 @@
+.tab-pane {
+    -fx-tab-min-height: 3em;
+    -fx-tab-max-height: 3em;
+}
+.tab-button {
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-content-display: graphic-only;
+}
+
+.tab {
+   -fx-pref-width: 175;
+}
+.tab .tab-label {
+    -fx-background-color: Transparent;
+    -fx-alignment: Center;
+    -fx-text-fill: Black;
+    -fx-font-size: 16;
+}
+.tab {
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 10.0;
+    -fx-background-color: Gainsboro;
+    -fx-border-color: White;
+    -fx-border-radius: 10.0;
+}
+.tab:selected {
+    -fx-background-color: CornflowerBlue;
+    -fx-border-color: transparent;
+    -fx-text-fill: White;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: White;
+}
+.tab:focused {
+    -fx-focus-color: transparent;
+}
+.tab {
+    -fx-padding: 0 30 0 30;
+}
+.tab-pane *.tab-header-background {
+    -fx-background-color: Gainsboro;
+}
+.tab-pane:top *.tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em;
+}
+.tab:selected .focus-indicator {
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent;
+}

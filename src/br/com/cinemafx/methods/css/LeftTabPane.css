@@ -1,0 +1,23 @@
+.tab *.tab-label {
+    -fx-rotate: 90;
+}
+.tab-pane *.tab-header-area *.tab-header-background {
+  -fx-background-color: White;
+}
+
+.tab-pane {
+  -fx-tab-min-width: 50px;
+  -fx-tab-max-width: 50px;
+  -fx-tab-min-height: 100px;
+  -fx-tab-max-height: 100px;
+}
+
+.tab {
+  -fx-font-family: System;
+  -fx-font-size: 18;
+  -fx-background-color: LightGray;
+}
+
+.tab:selected {
+    -fx-background-color: #3dd6ea;
+}

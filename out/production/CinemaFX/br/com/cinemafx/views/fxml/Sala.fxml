@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.cinemafx.controllers.SalaCtrl">
+   <children>
+      <VBox layoutY="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="-10.0" layoutY="-5.0" prefHeight="27.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="37.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                     <image>
+                        <Image url="@../images/Cadeira.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="230.0" text="Salas" textAlignment="CENTER" underline="true" HBox.hgrow="NEVER">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="716.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <JFXButton fx:id="btnView" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Modo_Grade.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Modo Grade">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnAtualizar" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Refresh.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Atualizar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnAdicionar" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView cache="true" fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Adicionar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Adicionar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnSalvar" buttonType="RAISED" contentDisplay="CENTER" disable="true" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Salvar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Salvar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnCancelar" buttonType="RAISED" contentDisplay="CENTER" disable="true" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Cancelar2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Cancelar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnEditar" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Editar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Editar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnDuplicar" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Duplicar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Duplicar">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnExcluir" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_Excluir.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Excluir">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnPrimeiro" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_PrimeiraLinha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Primeira Linha">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnAnterior" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_AnteriorLinha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Linha Anterior">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnProximo" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_ProximaLinha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Próxima Linha">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="btnUltimo" buttonType="RAISED" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" ripplerFill="#289fd7" style="-fx-border-color: LightGray;">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/Icone_UltimaLinha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Última Linha">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </JFXButton>
+                        <Label fx:id="lblMensagem" prefHeight="34.0" prefWidth="376.0" style="-fx-max-width: INFINITY;" text="Parceiro excluído com sucesso!" visible="false">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Sucesso.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="5.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+            </HBox>
+            <Separator prefWidth="200.0" valignment="BOTTOM" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+      <AnchorPane fx:id="paneGrade" layoutX="10.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <TableView fx:id="tbvSalas" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneForm" layoutX="142.0" layoutY="238.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Código: " />
+            <TextField fx:id="txfCodigo" alignment="CENTER" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="99.0" />
+            <Label layoutX="14.0" layoutY="63.0" text="Referência:" />
+            <TextField fx:id="txfReferencia" alignment="CENTER" layoutX="14.0" layoutY="80.0" prefHeight="25.0" prefWidth="340.0" />
+            <Label layoutX="14.0" layoutY="114.0" text="Capacidade:" />
+            <Spinner fx:id="spnCapacidade" editable="true" layoutX="14.0" layoutY="131.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Spinner>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

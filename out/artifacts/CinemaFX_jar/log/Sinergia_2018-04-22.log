@@ -1,0 +1,882 @@
+22/04/2018-20:05:04,134 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT COUNT(1) FROM TUSU WHERE LOGIN = ? 
+22/04/2018-20:05:04,149 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:05:04,203 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 54ms 
+22/04/2018-20:05:04,218 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU
+WHERE LOGIN = ? 
+22/04/2018-20:05:04,219 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:05:04,222 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 2ms 
+22/04/2018-20:05:05,122 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-20:05:05,123 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,123 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,123 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,123 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,123 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,124 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,124 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-20:05:05,126 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:05:05,126 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:05:05,126 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,127 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:05:05,127 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:05,130 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 3ms 
+22/04/2018-20:05:05,135 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-20:05:05,146 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 20:05:05 
+22/04/2018-20:05:05,179 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:05:05,181 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-20:05:05,186 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:05:05,186 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:05,193 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:05:05,365 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 172ms 
+22/04/2018-20:05:05,728 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:05:05,729 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:06,220 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:05:06,221 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:05:06,226 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:05:06,227 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:06,231 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:05:06,253 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 22ms 
+22/04/2018-20:05:06,551 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:05:06,554 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:05:06,556 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-20:05:06,558 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-20:05:06,561 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:05:06,563 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 0 
+22/04/2018-20:05:06,563 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 0 
+22/04/2018-20:05:06,568 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 4ms 
+22/04/2018-20:05:06,597 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:05:06,598 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:05:06,774 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:05:06,774 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:06,787 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:05:06,805 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-20:05:06,942 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:05:06,943 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:07,012 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:05:07,013 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:07,101 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-20:05:07,101 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:05:11,759 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : SELECT TEXTO FROM TPARAMETROS
+WHERE CHAVE = ?
+AND CODUSU IN (?, 0)
+ORDER BY CODUSU DESC 
+22/04/2018-20:05:11,760 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 1º Parâmetro(java.lang.String): VERSAOATUALDB 
+22/04/2018-20:05:11,760 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:05:11,763 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : ResultSet Source criado em 3ms 
+22/04/2018-20:05:21,983 | INFO [class br.com.cinemafx.methods.KeySearchStage] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:05:21,985 | INFO [class br.com.cinemafx.methods.KeySearchStage] : ResultSet Source criado em 1ms 
+22/04/2018-20:05:25,102 | INFO [class br.com.cinemafx.controllers.Main] : Deseja realmente finalizar o sistema? 
+22/04/2018-20:05:28,018 | INFO [class br.com.cinemafx.controllers.Main] : Opção selecionada: Finalizar 
+22/04/2018-20:06:42,349 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT COUNT(1) FROM TUSU WHERE LOGIN = ? 
+22/04/2018-20:06:42,364 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:06:42,365 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:42,369 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU
+WHERE LOGIN = ? 
+22/04/2018-20:06:42,369 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:06:42,370 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:42,741 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-20:06:42,742 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,742 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,742 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,743 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,743 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,743 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,743 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-20:06:42,745 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:06:42,746 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:06:42,746 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,746 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:06:42,746 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:42,750 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 4ms 
+22/04/2018-20:06:42,754 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-20:06:42,757 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 20:06:42 
+22/04/2018-20:06:42,779 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:06:42,781 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:42,787 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:06:42,789 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:42,795 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:06:42,821 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 25ms 
+22/04/2018-20:06:42,919 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:06:42,919 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:43,260 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:06:43,261 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:43,266 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:06:43,267 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:43,272 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:06:43,295 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 23ms 
+22/04/2018-20:06:43,383 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:06:43,383 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:43,384 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-20:06:43,385 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-20:06:43,385 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:06:43,385 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 0 
+22/04/2018-20:06:43,386 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 0 
+22/04/2018-20:06:43,387 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:43,409 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:06:43,410 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:43,765 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:06:43,765 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:43,773 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:06:43,797 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 23ms 
+22/04/2018-20:06:43,987 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:06:43,989 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:44,087 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:06:44,088 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:06:44,186 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-20:06:44,187 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:06:47,355 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : SELECT TEXTO FROM TPARAMETROS
+WHERE CHAVE = ?
+AND CODUSU IN (?, 0)
+ORDER BY CODUSU DESC 
+22/04/2018-20:06:47,355 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 1º Parâmetro(java.lang.String): VERSAOATUALDB 
+22/04/2018-20:06:47,356 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:06:47,356 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : ResultSet Source criado em 0ms 
+22/04/2018-20:17:21,131 | INFO [class br.com.cinemafx.controllers.Main] : Deseja realmente finalizar o sistema? 
+22/04/2018-20:17:21,443 | INFO [class br.com.cinemafx.controllers.Main] : Opção selecionada: Finalizar 
+22/04/2018-20:23:16,232 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT COUNT(1) FROM TUSU WHERE LOGIN = ? 
+22/04/2018-20:23:16,252 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:23:16,253 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:16,257 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU
+WHERE LOGIN = ? 
+22/04/2018-20:23:16,258 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-20:23:16,259 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:16,644 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-20:23:16,645 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,645 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-20:23:16,649 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:23:16,649 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:23:16,649 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,649 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:23:16,650 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:16,653 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 3ms 
+22/04/2018-20:23:16,657 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-20:23:16,660 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 20:23:16 
+22/04/2018-20:23:16,683 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:23:16,683 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:16,688 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:23:16,689 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:16,696 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:23:16,714 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-20:23:16,803 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:23:16,804 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:17,082 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:23:17,083 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:17,088 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:23:17,088 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:17,092 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:23:17,110 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-20:23:17,188 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:23:17,188 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:17,188 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-20:23:17,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-20:23:17,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:23:17,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 0 
+22/04/2018-20:23:17,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 0 
+22/04/2018-20:23:17,191 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:17,203 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:23:17,204 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:17,333 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:23:17,333 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:17,339 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:23:17,355 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 16ms 
+22/04/2018-20:23:17,479 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:23:17,480 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:17,546 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:23:17,547 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:23:17,617 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-20:23:17,618 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:23:19,846 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : SELECT TEXTO FROM TPARAMETROS
+WHERE CHAVE = ?
+AND CODUSU IN (?, 0)
+ORDER BY CODUSU DESC 
+22/04/2018-20:23:19,846 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 1º Parâmetro(java.lang.String): VERSAOATUALDB 
+22/04/2018-20:23:19,846 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:23:19,847 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:24:57,435 | INFO [class br.com.cinemafx.methods.KeySearchStage] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:24:57,438 | INFO [class br.com.cinemafx.methods.KeySearchStage] : ResultSet Source criado em 1ms 
+22/04/2018-20:25:06,644 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-20:25:06,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,646 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,647 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 21 
+22/04/2018-20:25:06,647 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 21 
+22/04/2018-20:25:06,648 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,648 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,649 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-20:25:06,650 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:25:06,650 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:25:06,651 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,651 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:25:06,651 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:25:06,657 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 5ms 
+22/04/2018-20:25:06,658 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-20:25:06,659 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 20:25:06 
+22/04/2018-20:25:16,553 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:25:16,554 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:28:55,596 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-20:28:55,600 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 4ms 
+22/04/2018-20:29:06,348 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-20:29:06,349 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,350 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,350 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,350 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,350 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,351 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,351 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-20:29:06,352 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:29:06,353 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:29:06,353 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,353 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-20:29:06,354 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-20:29:06,364 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 10ms 
+22/04/2018-20:29:06,368 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-20:29:06,368 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 20:29:06 
+22/04/2018-20:44:02,347 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : Deseja realmente excluir a(s) sala(s) selecionada(s)?
+21 - Sala Vingadores 
+22/04/2018-20:44:03,225 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : Opção selecionada: Confirmar 
+22/04/2018-20:44:03,243 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : SELECT COUNT(1) FROM TSESSOES
+WHERE 1 = 1
+AND CODSALA =  ? 
+22/04/2018-20:44:03,244 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : 1º Parâmetro(java.lang.Object[]): [Ljava.lang.Object;@3ec0b9d1 
+22/04/2018-20:44:03,244 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : 1º Parâmetro(java.lang.Integer): 21 
+22/04/2018-20:44:03,248 | INFO [class br.com.cinemafx.controllers.SalaCtrl] : ResultSet Source criado em 4ms 
+22/04/2018-20:44:03,285 | ERROR [class br.com.cinemafx.controllers.SalaCtrl] : Erro ao tentar excluir sala(s)
+Existem sessões cadastradas para estas salas
+Caso seja necessário, exclua as sessões destas salas e tente novamente. 
+java.lang.Exception: Existem sessões cadastradas para estas salas
+Caso seja necessário, exclua as sessões destas salas e tente novamente.
+	at br.com.cinemafx.controllers.SalaCtrl.ctrlAction(SalaCtrl.java:271)
+	at br.com.cinemafx.controllers.SalaCtrl.lambda$appCalls$10(SalaCtrl.java:89)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8413)
+	at javafx.scene.control.Button.fire(Button.java:185)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:182)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:96)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:89)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3757)
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3485)
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2494)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:394)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$353(GlassViewEventHandler.java:432)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:389)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:431)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$147(WinApplication.java:177)
+	at java.lang.Thread.run(Unknown Source)
+22/04/2018-20:46:58,596 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:46:58,598 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:46:58,607 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:46:58,609 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-20:46:58,618 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:46:58,662 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 43ms 
+22/04/2018-20:46:58,744 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:46:58,745 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:46:58,746 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-20:46:58,746 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-20:46:58,747 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:46:58,747 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 18 
+22/04/2018-20:46:58,747 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 18 
+22/04/2018-20:46:58,748 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:47:02,645 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-20:47:02,646 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:47:02,658 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-20:47:02,659 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-20:47:02,670 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-20:47:03,042 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 371ms 
+22/04/2018-20:47:03,102 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-20:47:03,102 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-20:47:03,103 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-20:47:03,103 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-01 
+22/04/2018-20:47:03,104 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-20:47:03,104 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 18 
+22/04/2018-20:47:03,104 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 18 
+22/04/2018-20:47:03,105 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-20:47:07,047 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : Deseja realmente excluir a(s) sessao(ões) selecionada(s)?
+Piratas do Caribe 3: No Fim do Mundo ás 15/04/2018 23:51:00
+X-Men 3: O Confronto Final ás 15/04/2018 12:51:00 
+22/04/2018-20:47:07,825 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : Opção selecionada: Confirmar 
+22/04/2018-20:47:07,835 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : DELETE FROM TSESSOES WHERE CODSESSAO IN (?, ?) 
+22/04/2018-20:47:07,835 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.util.ArrayList): [40, 41] 
+22/04/2018-20:47:07,835 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.lang.Integer): 40 
+22/04/2018-20:47:07,835 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.lang.Integer): 41 
+22/04/2018-20:47:07,954 | ERROR [class br.com.cinemafx.controllers.SessaoCtrl] : Erro ao tentar excluir sessão(ões)
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cinemafx`.`tingressos`, CONSTRAINT `FK_TINGRESSOS_SESSAO` FOREIGN KEY (`CODSESSAO`) REFERENCES `tsessoes` (`CODSESSAO`) ON DELETE NO ACTION ON UPDATE NO ACTION) 
+java.lang.Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cinemafx`.`tingressos`, CONSTRAINT `FK_TINGRESSOS_SESSAO` FOREIGN KEY (`CODSESSAO`) REFERENCES `tsessoes` (`CODSESSAO`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+	at br.com.cinemafx.dbcontrollers.DBBoss.excluiSessao(DBBoss.java:261)
+	at br.com.cinemafx.controllers.SessaoCtrl.ctrlAction(SessaoCtrl.java:476)
+	at br.com.cinemafx.controllers.SessaoCtrl.lambda$appCalls$11(SessaoCtrl.java:109)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8413)
+	at javafx.scene.control.Button.fire(Button.java:185)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:182)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:96)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:89)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3757)
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3485)
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2494)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:394)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$353(GlassViewEventHandler.java:432)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:389)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:431)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$147(WinApplication.java:177)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`cinemafx`.`tingressos`, CONSTRAINT `FK_TINGRESSOS_SESSAO` FOREIGN KEY (`CODSESSAO`) REFERENCES `tsessoes` (`CODSESSAO`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at br.com.cinemafx.dbcontrollers.Conexao.execute(Conexao.java:77)
+	at br.com.cinemafx.dbcontrollers.DBBoss.excluiSessao(DBBoss.java:259)
+	... 53 more
+22/04/2018-21:06:31,348 | INFO [class br.com.cinemafx.controllers.Main] : Deseja realmente finalizar o sistema? 
+22/04/2018-21:06:32,052 | INFO [class br.com.cinemafx.controllers.Main] : Opção selecionada: Finalizar 
+22/04/2018-21:23:34,547 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT COUNT(1) FROM TUSU WHERE LOGIN = ? 
+22/04/2018-21:23:34,610 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-21:23:34,640 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 30ms 
+22/04/2018-21:23:34,647 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU
+WHERE LOGIN = ? 
+22/04/2018-21:23:34,647 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-21:23:34,649 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-21:23:35,338 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-21:23:35,340 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,340 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,340 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,340 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,341 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,341 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,341 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-21:23:35,344 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-21:23:35,344 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-21:23:35,344 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,344 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-21:23:35,345 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:35,443 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 97ms 
+22/04/2018-21:23:35,447 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-21:23:35,450 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 21:23:35 
+22/04/2018-21:23:35,481 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:23:35,496 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 15ms 
+22/04/2018-21:23:35,502 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:23:35,523 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 20ms 
+22/04/2018-21:23:35,528 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:23:35,759 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 231ms 
+22/04/2018-21:23:35,920 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:23:35,922 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:23:36,368 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:23:36,370 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:23:36,375 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:23:36,377 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:23:36,382 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:23:36,404 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 22ms 
+22/04/2018-21:23:36,486 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:23:36,488 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:23:36,488 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-21:23:36,489 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-21:23:36,489 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-21:23:36,490 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 0 
+22/04/2018-21:23:36,490 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 0 
+22/04/2018-21:23:36,530 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 40ms 
+22/04/2018-21:23:36,548 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:23:36,550 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:23:36,740 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:23:36,743 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:23:36,757 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:23:36,775 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-21:23:37,023 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:23:37,027 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 3ms 
+22/04/2018-21:23:37,105 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:23:37,108 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 3ms 
+22/04/2018-21:23:37,187 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-21:23:37,188 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:23:40,122 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : SELECT TEXTO FROM TPARAMETROS
+WHERE CHAVE = ?
+AND CODUSU IN (?, 0)
+ORDER BY CODUSU DESC 
+22/04/2018-21:23:40,122 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 1º Parâmetro(java.lang.String): VERSAOATUALDB 
+22/04/2018-21:23:40,122 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:23:40,158 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : ResultSet Source criado em 36ms 
+22/04/2018-21:24:35,322 | INFO [class br.com.cinemafx.controllers.Main] : Deseja realmente finalizar o sistema? 
+22/04/2018-21:24:36,590 | INFO [class br.com.cinemafx.controllers.Main] : Opção selecionada: Finalizar 
+22/04/2018-21:29:26,220 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT COUNT(1) FROM TUSU WHERE LOGIN = ? 
+22/04/2018-21:29:26,313 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-21:29:26,314 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:26,319 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU
+WHERE LOGIN = ? 
+22/04/2018-21:29:26,320 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : 1º Parâmetro(java.lang.String): CLARA 
+22/04/2018-21:29:26,321 | INFO [class br.com.cinemafx.controllers.LoginCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:26,634 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : SELECT CODSESSAO, CODFILME, CODEXIB, CODSALA, INTEGRAL, DATAHORA, QTDING,
+CASE WHEN INTEGRAL 	= 'S' THEN ROUND((QTDING * VLREXIB),2)
+	 ELSE ROUND(((QTDING * VLREXIB) / 2),2)
+END AS VLRTOTAL
+FROM
+  (SELECT COUNT(1) AS QTDING, ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, 
+	SES.DATAHORA, ING.INTEGRAL, AVG(EXB.VLREXIB) AS VLREXIB
+   FROM TINGRESSOS ING
+   JOIN TSESSOES SES ON (ING.CODSESSAO = SES.CODSESSAO)
+   JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+   WHERE (0 = ? OR SES.CODSESSAO = ?)
+   AND (0 = ? OR SES.CODSALA = ?)
+   AND (0 = ? OR SES.CODEXIB = ?)
+   AND SES.DATAHORA >= ?
+   AND SES.DATAHORA <= ?
+   AND (0 IN (?) OR SES.CODFILME IN (?))   GROUP BY ING.CODSESSAO, SES.CODFILME, SES.CODEXIB, SES.CODSALA, ING.INTEGRAL) X 
+22/04/2018-21:29:26,635 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 1º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,635 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,635 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 3º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,635 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 4º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,636 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 5º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,636 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 6º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,636 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 7º Parâmetro(java.time.LocalDate): 2018-03-23 
+22/04/2018-21:29:26,638 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 8º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-21:29:26,638 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-21:29:26,639 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 9º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,639 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.util.ArrayList): [0] 
+22/04/2018-21:29:26,639 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : 10º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:26,645 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : ResultSet Source criado em 6ms 
+22/04/2018-21:29:26,650 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : O usuário solicitou a atualização dos gráficos. 
+22/04/2018-21:29:26,653 | INFO [class br.com.cinemafx.controllers.IngressoCtrl] : Gráficos alimentados e estruturados, término ás 22/04/2018 21:29:26 
+22/04/2018-21:29:26,679 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:29:26,680 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-21:29:26,686 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:29:26,688 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:26,693 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:29:26,714 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 21ms 
+22/04/2018-21:29:26,790 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:29:26,792 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:27,085 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:29:27,087 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:27,091 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:29:27,093 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:27,096 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:29:27,115 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-21:29:27,185 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:29:27,187 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:27,188 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : SELECT SES.CODSESSAO, SAL.CODSALA, FIL.CODFILME, EXB.CODEXIB, SES.DATAHORA
+    FROM TSESSOES SES
+        JOIN TFILMES FIL ON (SES.CODFILME = FIL.CODFILME)
+        JOIN TGENEROS GEN ON (FIL.CODGENERO = GEN.CODGENERO)
+        JOIN TSALAS SAL ON (SES.CODSALA = SAL.CODSALA)
+        JOIN TEXIBS EXB ON (SES.CODEXIB = EXB.CODEXIB)
+    WHERE SES.CODSESSAO <> 0
+    AND DATE_FORMAT(SES.DATAHORA, '%Y-%m-%d') >= ?
+    AND DATE_FORMAT((SES.DATAHORA + INTERVAL FIL.MINFILME MINUTE), '%Y-%m-%d') <= ?
+    AND (? = 0 OR SAL.CODSALA = ?)
+    ORDER BY 1 
+22/04/2018-21:29:27,188 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 1º Parâmetro(java.time.LocalDate): 2018-04-21 
+22/04/2018-21:29:27,188 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 2º Parâmetro(java.time.LocalDate): 2018-04-23 
+22/04/2018-21:29:27,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 3º Parâmetro(java.lang.String): 0 
+22/04/2018-21:29:27,189 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : 4º Parâmetro(java.lang.String): 0 
+22/04/2018-21:29:27,192 | INFO [class br.com.cinemafx.controllers.SessaoCtrl] : ResultSet Source criado em 3ms 
+22/04/2018-21:29:27,206 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:29:27,208 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:27,345 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODGENERO, NOMEGENERO FROM TGENEROS 
+22/04/2018-21:29:27,346 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:27,351 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODFILME, NOMEFILME, SINOPSE,
+CUSTOFILME, CODGENERO, MINFILME, IMAGEM
+FROM TFILMES 
+22/04/2018-21:29:27,370 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 18ms 
+22/04/2018-21:29:27,490 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODEXIB, NOMEEXIB, VLREXIB FROM TEXIBS 
+22/04/2018-21:29:27,491 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:27,562 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS 
+22/04/2018-21:29:27,564 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:27,632 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-21:29:27,632 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 0ms 
+22/04/2018-21:29:29,976 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : SELECT TEXTO FROM TPARAMETROS
+WHERE CHAVE = ?
+AND CODUSU IN (?, 0)
+ORDER BY CODUSU DESC 
+22/04/2018-21:29:29,977 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 1º Parâmetro(java.lang.String): VERSAOATUALDB 
+22/04/2018-21:29:29,977 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : 2º Parâmetro(java.lang.Integer): 0 
+22/04/2018-21:29:29,978 | INFO [class br.com.cinemafx.controllers.PrincipalCtrl] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:38,459 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : SELECT COUNT(1) FROM TUSU
+WHERE 1 = 1 
+AND LOGIN = ? 
+22/04/2018-21:29:38,459 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.util.ArrayList): [TESTE] 
+22/04/2018-21:29:38,459 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.String): TESTE 
+22/04/2018-21:29:38,461 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:38,466 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : INSERT INTO TUSU (NOMEUSU, LOGIN, SENHA, ATIVO)
+VALUES (?, ?, ?, ?) 
+22/04/2018-21:29:38,467 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.String): teste 
+22/04/2018-21:29:38,467 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 2º Parâmetro(java.lang.String): TESTE 
+22/04/2018-21:29:38,467 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 3º Parâmetro(java.lang.String): q021-v789-r687-q021-v789 
+22/04/2018-21:29:38,467 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 4º Parâmetro(java.lang.String): S 
+22/04/2018-21:29:38,555 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : Statement Source retornado em 88ms, 1 linha(s) afetadas 
+22/04/2018-21:29:38,555 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : SELECT LAST_INSERT_ID() 
+22/04/2018-21:29:38,583 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : ResultSet Source criado em 27ms 
+22/04/2018-21:29:38,594 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-21:29:38,598 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 4ms 
+22/04/2018-21:29:47,380 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : SELECT COUNT(1) FROM TUSU
+WHERE 1 = 1 
+AND LOGIN = ? 
+22/04/2018-21:29:47,381 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.util.ArrayList): [TESTE] 
+22/04/2018-21:29:47,381 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.String): TESTE 
+22/04/2018-21:29:47,438 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : ResultSet Source criado em 57ms 
+22/04/2018-21:29:47,500 | ERROR [class br.com.cinemafx.controllers.UsuarioCtrl] : Erro ao tentar cadastrar novo usuário
+Já existe um usuário com este login 
+java.lang.Exception: Já existe um usuário com este login
+	at br.com.cinemafx.dbcontrollers.DBBoss.inseriUser(DBBoss.java:19)
+	at br.com.cinemafx.controllers.UsuarioCtrl.ctrlAction(UsuarioCtrl.java:231)
+	at br.com.cinemafx.controllers.UsuarioCtrl.lambda$appCalls$6(UsuarioCtrl.java:87)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8413)
+	at javafx.scene.control.Button.fire(Button.java:185)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:182)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:96)
+	at com.sun.javafx.scene.control.skin.BehaviorSkinBase$1.handle(BehaviorSkinBase.java:89)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3757)
+	at javafx.scene.Scene$MouseHandler.access$1500(Scene.java:3485)
+	at javafx.scene.Scene.impl_processMouseEvent(Scene.java:1762)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2494)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:394)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$353(GlassViewEventHandler.java:432)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:389)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:431)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:555)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$147(WinApplication.java:177)
+	at java.lang.Thread.run(Unknown Source)
+22/04/2018-21:29:51,695 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : SELECT COUNT(1) FROM TUSU
+WHERE 1 = 1 
+AND LOGIN = ? 
+22/04/2018-21:29:51,695 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.util.ArrayList): [TESTE1] 
+22/04/2018-21:29:51,695 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.String): TESTE1 
+22/04/2018-21:29:51,697 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : ResultSet Source criado em 2ms 
+22/04/2018-21:29:51,704 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : INSERT INTO TUSU (NOMEUSU, LOGIN, SENHA, ATIVO)
+VALUES (?, ?, ?, ?) 
+22/04/2018-21:29:51,705 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.String): teste 
+22/04/2018-21:29:51,706 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 2º Parâmetro(java.lang.String): TESTE1 
+22/04/2018-21:29:51,706 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 3º Parâmetro(java.lang.String): q021-v789-r687-q021-v789 
+22/04/2018-21:29:51,706 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 4º Parâmetro(java.lang.String): S 
+22/04/2018-21:29:51,795 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : Statement Source retornado em 89ms, 1 linha(s) afetadas 
+22/04/2018-21:29:51,795 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : SELECT LAST_INSERT_ID() 
+22/04/2018-21:29:51,795 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : ResultSet Source criado em 0ms 
+22/04/2018-21:29:51,799 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-21:29:51,801 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 1ms 
+22/04/2018-21:29:59,584 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : Deseja realmente excluir o(s) usuário(s) selecionado(s)?
+6 - TESTE
+7 - TESTE1 
+22/04/2018-21:30:00,365 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : Opção selecionada: Confirmar 
+22/04/2018-21:30:00,376 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : DELETE FROM TUSU WHERE CODUSU IN (?, ?) 
+22/04/2018-21:30:00,377 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.util.ArrayList): [6, 7] 
+22/04/2018-21:30:00,377 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 1º Parâmetro(java.lang.Integer): 6 
+22/04/2018-21:30:00,377 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : 2º Parâmetro(java.lang.Integer): 7 
+22/04/2018-21:30:00,520 | INFO [class br.com.cinemafx.controllers.UsuarioCtrl] : Statement Source retornado em 142ms, 2 linha(s) afetadas 
+22/04/2018-21:30:00,532 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : SELECT CODUSU, NOMEUSU, LOGIN, SENHA, ATIVO
+FROM TUSU 
+22/04/2018-21:30:00,535 | INFO [class br.com.cinemafx.dbcontrollers.DBObjects] : ResultSet Source criado em 2ms 
+22/04/2018-21:32:08,487 | INFO [class br.com.cinemafx.controllers.Main] : Deseja realmente finalizar o sistema? 
+22/04/2018-21:32:08,759 | INFO [class br.com.cinemafx.controllers.Main] : Opção selecionada: Finalizar 

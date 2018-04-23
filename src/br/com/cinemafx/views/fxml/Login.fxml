@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="pane" prefHeight="326.0" prefWidth="406.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.cinemafx.controllers.LoginCtrl">
+    <children>
+        <ImageView fitHeight="66.0" fitWidth="394.0" layoutX="6.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="14.0">
+            <image>
+                <Image url="@../images/Logo.png" />
+            </image>
+        </ImageView>
+        <Separator layoutX="14.0" layoutY="74.0" prefHeight="14.0" prefWidth="371.0" />
+      <ProgressIndicator fx:id="pgiLogin" layoutX="135.0" layoutY="226.0" prefHeight="30.0" prefWidth="136.0" visible="false" />
+        <Label alignment="CENTER_RIGHT" layoutX="38.0" layoutY="88.0" text="Usuario:">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txfLogin" alignment="CENTER" layoutX="38.0" layoutY="114.0" prefHeight="27.0" prefWidth="343.0" promptText="Username" stylesheets="@../../methods/css/SplashTextField.css" />
+        <Label contentDisplay="RIGHT" layoutX="38.0" layoutY="151.0" prefHeight="25.0" prefWidth="58.0" text="Senha:">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+      <HBox layoutX="38.0" layoutY="181.0">
+         <children>
+              <PasswordField fx:id="pwfSenha" alignment="CENTER" layoutX="38.0" layoutY="181.0" prefHeight="27.0" prefWidth="310.0" promptText="Password" stylesheets="@../../methods/css/SplashTextField.css" />
+            <Label fx:id="lblShowSenha" contentDisplay="GRAPHIC_ONLY" text="Label">
+               <graphic>
+                  <ImageView cache="true" cacheHint="SPEED" fitHeight="29.0" fitWidth="23.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Icone_Show_Senha.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip style="-fx-background-color: white; -fx-border-color: lightgray; -fx-text-fill: black;" text="s" />
+               </tooltip>
+            </Label>
+         </children>
+      </HBox>
+        <Button fx:id="btnLogin" contentDisplay="RIGHT" layoutX="274.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: LightGray;" text="Acessar">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Icone_Entrar.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <Hyperlink fx:id="hplSite" alignment="CENTER" layoutY="258.0" prefHeight="23.0" prefWidth="209.0" text="cinemafx.com.br" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Hyperlink>
+        <Hyperlink fx:id="hplDesenv" alignment="CENTER" layoutY="294.0" prefHeight="23.0" prefWidth="209.0" text="2018 (c) Marcelo Costa Domingues" textAlignment="CENTER" visited="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    </children>
+</AnchorPane>

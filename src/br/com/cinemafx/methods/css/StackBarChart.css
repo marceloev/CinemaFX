@@ -1,0 +1,19 @@
+.default-color0.chart-bar {
+    -fx-bar-fill: #9ACD32; 
+}
+.default-color1.chart-bar { 
+    -fx-bar-fill: #ADD8E6; 
+}
+.chart-legend {
+   -fx-background-color: transparent;
+   -fx-border-color: Gainsboro;
+   -fx-padding: 5px;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #ffffff;
+}
+.chart-alternative-row-fill {
+    -fx-fill: #e9edf4;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
