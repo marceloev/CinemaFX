@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Conexao {
@@ -153,6 +154,11 @@ public class Conexao {
                 break;
             case "java.util.ArrayList":
                 for (Object obj : (ArrayList<Object>) objeto)
+                    addParametro(obj);
+                this.index--;
+                break;
+            case "java.util.Arrays$ArrayList":
+                for (Object obj : (List<Object>) objeto)
                     addParametro(obj);
                 this.index--;
                 break;

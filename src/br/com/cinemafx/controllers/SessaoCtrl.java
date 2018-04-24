@@ -197,6 +197,7 @@ public class SessaoCtrl implements Initializable, CadCtrlIntface {
             if (!retorno.isEmpty()) {
                 txfCodSala.setText(retorno.get(0).toString());
                 txfNomeSala.setText(retorno.get(1).toString());
+                getCachedSessao().setSala(DBObjects.getSalaByCod(this.getClass(), (Integer) retorno.get(0)));
             }
         });
         txfCodExib.focusedProperty().addListener((obs, oldV, newV) -> {
@@ -223,10 +224,11 @@ public class SessaoCtrl implements Initializable, CadCtrlIntface {
                         new Pair<>("Nome Exibição", TableColumnType.Texto_Pequeno),
                         new Pair<>("Vlr. Exibição", TableColumnType.Dinheiro)));
         exibicaoKeySearchStage.setOnCloseRequest(e -> {
-            List<Object> retorno = salaKeySearchStage.getKeyReturn();
+            List<Object> retorno = exibicaoKeySearchStage.getKeyReturn();
             if (!retorno.isEmpty()) {
                 txfCodExib.setText(retorno.get(0).toString());
                 txfNomeExib.setText(retorno.get(1).toString());
+                getCachedSessao().setExibicao(DBObjects.getExibicaoByCod(this.getClass(), (Integer) retorno.get(0)));
             }
         });
         txfCodFilme.focusedProperty().addListener((obs, oldV, newV) -> {
@@ -258,6 +260,7 @@ public class SessaoCtrl implements Initializable, CadCtrlIntface {
             if (!retorno.isEmpty()) {
                 txfCodFilme.setText(retorno.get(0).toString());
                 txfNomeFilme.setText(retorno.get(1).toString());
+                getCachedSessao().setFilme(DBObjects.getFilmeByCod(this.getClass(), (Integer) retorno.get(0)));
             }
         });
         dtpDataSes.valueProperty().addListener((obs, oldV, newV) -> {

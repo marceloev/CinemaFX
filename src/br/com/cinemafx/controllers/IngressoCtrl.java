@@ -269,7 +269,7 @@ public class IngressoCtrl implements Initializable {
             });
             for (Integer codFilme : codFilmes) {
                 String nomeFilme = DBObjects.getFilmeByCod(this.getClass(), codFilme).getNomeFilme();
-                if (nomeFilme.length() > 20) nomeFilme = nomeFilme.substring(0, 20).concat("...");
+                if (nomeFilme.length() > 20) nomeFilme = nomeFilme.substring(0, 17).concat("...");
                 VendasPorFilme vendasPorFilme = new VendasPorFilme(codFilme, nomeFilme);
                 vendasObservableList.stream().filter(vendas -> vendas.getCodFilme() == codFilme).forEach(vendas ->
                         vendasPorFilme.setQtdVlr(vendas.isIntegral(), vendas.getQtdIngresso(), vendas.getVlrTotal()));

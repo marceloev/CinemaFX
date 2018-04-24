@@ -1,6 +1,7 @@
 package br.com.cinemafx.controllers;
 
 import br.com.cinemafx.dbcontrollers.DBBoss;
+import br.com.cinemafx.dbcontrollers.DBFunctions;
 import br.com.cinemafx.dbcontrollers.DBObjects;
 import br.com.cinemafx.methods.Functions;
 import br.com.cinemafx.methods.MaskField;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.util.Pair;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -331,6 +333,11 @@ public class FilmeCtrl implements Initializable, CadCtrlIntface {
                     try {
                         ArrayList<Integer> codFilmes = new ArrayList<>();
                         tbvFilmes.getSelectionModel().getSelectedItems().forEach(filme -> codFilmes.add(filme.getCodFilme()));
+                        int count = DBFunctions.checkIfExistsWithoutThrows(this.getClass(), "TSESSOES",
+                                new Pair<>("CODFILME", codFilmes.toArray()));
+                        if (count > 0)
+                            throw new Exception("Existem sessões cadastradas para estes filmes\n" +
+                                    "Caso seja necessário, exclua as sessões destes filmes e tente novamente.");
                         DBBoss.excluiFilme(this.getClass(), codFilmes);
                         ctrlAction(FrameAction.Atualizar);
                         sendMensagem(lblMensagem, true, "Filme(s) excluída(s) com sucesso");

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Functions {
 
@@ -64,6 +65,15 @@ public class Functions {
     }
 
     public static StringBuilder paramBuilder(ArrayList<?> array) {
+        StringBuilder paramBuilder = new StringBuilder();
+        for (int i = 0; i < array.size(); i++) {
+            if (i == 0) paramBuilder.append("?");
+            else paramBuilder.append(", ?");
+        }
+        return paramBuilder;
+    }
+
+    public static StringBuilder paramBuilder(List<?> array) {
         StringBuilder paramBuilder = new StringBuilder();
         for (int i = 0; i < array.size(); i++) {
             if (i == 0) paramBuilder.append("?");

@@ -53,7 +53,7 @@ public class AltSenhaDlg {
 
     private void estrutura() {
         estruturado = true;
-        dialog = new Dialog<Pair<Pair<String, String>, String>>();
+        dialog = new Dialog<>();
         dialog.setTitle("Alterar senha do usuário");
         dialog.setHeaderText("Digite aqui a nova senha e confirmação");
         // Set the icon (must be included in the project).
@@ -80,6 +80,11 @@ public class AltSenhaDlg {
         grid.add(new Label("Confirmação:"), 0, 2);
         grid.add(pwfConfirma, 1, 2);
         dialog.getDialogPane().setContent(grid);
+        dialog.setOnShown(e -> {
+            pwfOldSenha.clear();
+            pwfSenha.clear();
+            pwfConfirma.clear();
+        });
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(new Pair<>(pwfSenha.getText(), pwfConfirma.getText()), pwfOldSenha.getText());

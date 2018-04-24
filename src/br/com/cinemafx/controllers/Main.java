@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/br/com/cinemafx/views/fxml/Login2.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/br/com/cinemafx/views/fxml/Login.fxml"));
             Scene scene = new Scene(root);
             primaryStage.getIcons().add(new Image("/br/com/cinemafx/views/images/VideoPlay.png"));
             primaryStage.setTitle("CinemaFX");

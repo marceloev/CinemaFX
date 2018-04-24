@@ -52,6 +52,7 @@ public class ModelException extends Alert {
                     .text(charArrayWriter.toString())
                     .maxWidth(Double.MAX_VALUE)
                     .maxHeight(Double.MAX_VALUE)
+                    .editable(false )
                     .build();
             GridPane.setVgrow(textArea, Priority.ALWAYS);
             GridPane.setHgrow(textArea, Priority.ALWAYS);

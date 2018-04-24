@@ -1,10 +1,13 @@
 package br.com.cinemafx.dbcontrollers;
 
+import br.com.cinemafx.methods.Functions;
 import br.com.cinemafx.models.ParametroType;
 import br.com.cinemafx.views.dialogs.ModelException;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DBFunctions {
 
@@ -19,6 +22,57 @@ public class DBFunctions {
                 return "N";
             else
                 return "Não";
+        }
+    }
+
+    public static int checkIfExistsWithoutThrows(Class invocador, String nomeTabela, Pair<String, Object[]>... filtros) {
+        Conexao conex = new Conexao(invocador);
+        StringBuilder strBuilder = new StringBuilder();
+        int retorno = -1;
+        try {
+            strBuilder.append("SELECT COUNT(1) FROM " + nomeTabela);
+            strBuilder.append("\nWHERE 1 = 1");
+            for (Pair<String, Object[]> filtro : filtros)
+                strBuilder.append(String.format("\nAND %s IN (%s)", filtro.getKey(),
+                        Functions.paramBuilder(new ArrayList<>(Arrays.asList(filtro.getValue())))));
+            conex.createStatement(strBuilder.toString());
+            for (Pair<String, Object[]> filtro : filtros)
+                conex.addParametro(filtro.getValue());
+            conex.createSet();
+            conex.rs.next();
+            retorno = conex.rs.getInt(1);
+        } catch (Exception ex) {
+            new ModelException(invocador, "Erro ao tentar contar registros na Query: \n".concat(strBuilder.toString())
+                    .concat(ex.getMessage()), ex).getAlert().showAndWait();
+        } finally {
+            conex.desconecta();
+            return retorno;
+        }
+    }
+
+    public static int checkIfExists1(Class invocador, String nomeTabela, Pair<OpRelacional, Pair<String, List<Object>>>... filtros) {
+        Conexao conex = new Conexao(invocador);
+        StringBuilder strBuilder = new StringBuilder();
+        int retorno = -1;
+        strBuilder.append("SELECT COUNT(1) FROM " + nomeTabela);
+        strBuilder.append("\nWHERE 1 = 1");
+        try {
+            for (Pair<OpRelacional, Pair<String, List<Object>>> filtro : filtros) {
+                strBuilder.append(getParametros(filtro.getKey(), filtro.getValue().getKey(), filtro.getValue().getValue()));
+            }
+            conex.createStatement(strBuilder.toString());
+            for (Pair<OpRelacional, Pair<String, List<Object>>> filtro : filtros)
+                conex.addParametro(filtro.getValue().getValue());
+            conex.createSet();
+            conex.rs.next();
+            retorno = conex.rs.getInt(1);
+        } catch (Exception ex) {
+            new ModelException(invocador, "Erro ao tentar contar registros\n" + strBuilder.toString() + "\n" + ex.getMessage(), ex)
+                    .getAlert().showAndWait();
+            retorno = -1;
+        } finally {
+            conex.desconecta();
+            return retorno;
         }
     }
 
@@ -66,9 +120,9 @@ public class DBFunctions {
         Object resp = -1;
         try {
             conex.createStatement(String.format("SELECT %s FROM TPARAMETROS\n" +
-                            "WHERE CHAVE = ?\n" +
-                            "AND CODUSU IN (?, 0)\n" +
-                            "ORDER BY CODUSU DESC", parametroType.toString().toUpperCase()));
+                    "WHERE CHAVE = ?\n" +
+                    "AND CODUSU IN (?, 0)\n" +
+                    "ORDER BY CODUSU DESC", parametroType.toString().toUpperCase()));
             conex.addParametro(chave, codUsu);
             conex.createSet();
             if (conex.rs.next()) {
@@ -83,5 +137,24 @@ public class DBFunctions {
             conex.desconecta();
             return resp;
         }
+    }
+
+    private static String getParametros(OpRelacional opRelacional, String coluna, List<Object> values) {
+        String retorno = "";
+        switch (opRelacional) {
+            case EQUALS:
+                retorno = retorno.concat(String.format("\nAND %s IN (%s)", coluna, Functions.paramBuilder(values)));
+                break;
+            case DIFFERENT:
+                retorno = retorno.concat(String.format("\nAND %s NOT IN (%s)", coluna, Functions.paramBuilder(values)));
+                break;
+            case LIKE:
+                retorno = retorno.concat(String.format("\nAND %s LIKE ?", coluna));
+                break;
+            case NOT_LIKE:
+                retorno = retorno.concat(String.format("\nAND %s NOT LIKE ?", coluna));
+                break;
+        }
+        return retorno;
     }
 }

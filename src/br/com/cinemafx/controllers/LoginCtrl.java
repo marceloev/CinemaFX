@@ -7,6 +7,7 @@ import br.com.cinemafx.models.Password;
 import br.com.cinemafx.models.User;
 import br.com.cinemafx.views.dialogs.ModelDialog;
 import br.com.cinemafx.views.dialogs.ModelException;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.awt.*;
 import java.io.IOException;
@@ -29,6 +31,7 @@ import java.util.ResourceBundle;
 public class LoginCtrl implements Initializable {
 
     private SimpleBooleanProperty logginIn = new SimpleBooleanProperty(false);
+    //private Pair<String, String> passHidden = new Pair<>("", "");
 
     @FXML
     private AnchorPane pane;
@@ -39,7 +42,7 @@ public class LoginCtrl implements Initializable {
     @FXML
     private PasswordField pwfSenha;
     @FXML
-    private ProgressIndicator pgiLogin;
+    private ProgressBar pgbLoad;
     @FXML
     private Button btnLogin;
     @FXML
@@ -59,9 +62,15 @@ public class LoginCtrl implements Initializable {
         hplSite.setOnAction(e -> openNavHyperLink("https://cinemafx.com.br"));
         hplDesenv.setOnAction(e -> openNavHyperLink("https://github.com/marceloev"));
         logginIn.addListener((observable, oldV, newV) -> {
-            //pgiLogin.setVisible(newV);
+            pgbLoad.setVisible(newV);
             pane.setDisable(newV);
         });
+        /*pwfSenha.textProperty().addListener((obs, oldV, newV) -> {
+            String pass = "";
+            for (int i = 0; newV.length() > i; i++)
+                pass = pass.concat("*");
+            passHidden = new Pair<>(newV, pass);
+        });*/
         //lblShowSenha.getTooltip().textProperty().bind(pwfSenha.textProperty());
     }
 
@@ -124,20 +133,22 @@ public class LoginCtrl implements Initializable {
     }
 
     private void showPrincipalFrame() {
-        try {
-            Stage primaryStage = (Stage) this.btnLogin.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("/br/com/cinemafx/views/fxml/Principal.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
-            primaryStage.setMaximized(true);
-            primaryStage.setTitle(String.format("CinemaFX ( %d - %s )", User.getCurrent().getCodUsu(), User.getCurrent().getLoginUsu()));
-        } catch (IOException ex) {
-            new ModelException(this.getClass(),
-                    String.format("Erro ao tentar abrir tela principal\n%s\nA aplicação será finalizada", ex.getMessage()), ex).
-                    getAlert().showAndWait();
-            System.exit(0);
-        }
+        Platform.runLater(() -> {
+            try {
+                Stage primaryStage = (Stage) this.btnLogin.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("/br/com/cinemafx/views/fxml/Principal.fxml"));
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.setResizable(true);
+                primaryStage.setMaximized(true);
+                primaryStage.setTitle(String.format("CinemaFX ( %d - %s )", User.getCurrent().getCodUsu(), User.getCurrent().getLoginUsu()));
+            } catch (IOException ex) {
+                new ModelException(this.getClass(),
+                        String.format("Erro ao tentar abrir tela principal\n%s\nA aplicação será finalizada", ex.getMessage()), ex).
+                        getAlert().showAndWait();
+                System.exit(0);
+            }
+        });
     }
 
     private void openNavHyperLink(String url) {
