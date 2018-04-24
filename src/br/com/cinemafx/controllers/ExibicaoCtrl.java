@@ -3,6 +3,7 @@ package br.com.cinemafx.controllers;
 import br.com.cinemafx.dbcontrollers.DBBoss;
 import br.com.cinemafx.dbcontrollers.DBFunctions;
 import br.com.cinemafx.dbcontrollers.DBObjects;
+import br.com.cinemafx.dbcontrollers.OpRelacional;
 import br.com.cinemafx.methods.Functions;
 import br.com.cinemafx.methods.MaskField;
 import br.com.cinemafx.models.*;
@@ -22,6 +23,7 @@ import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -264,9 +266,8 @@ public class ExibicaoCtrl implements Initializable, CadCtrlIntface {
                     try {
                         ArrayList<Integer> codExibicoes = new ArrayList<>();
                         tbvExibicoes.getSelectionModel().getSelectedItems().forEach(exibicao -> codExibicoes.add(exibicao.getCodExibicao()));
-                        int count = DBFunctions.checkIfExistsWithoutThrows(this.getClass(), "TSESSOES",
-                                new Pair<>("CODEXIB", codExibicoes.toArray()));
-                        if (count > 0)
+                        if (DBFunctions.checkIfExists(this.getClass(), "TSESSOES",
+                                new Pair(OpRelacional.EQUALS, new Pair("CODEXIB", Arrays.asList(codExibicoes)))) > 0)
                             throw new Exception("Existem sessões cadastradas para estas exibições\n" +
                                     "Caso seja necessário, exclua as sessões destas exibições e tente novamente.");
                         DBBoss.excluiExibicao(this.getClass(), codExibicoes);

@@ -3,6 +3,7 @@ package br.com.cinemafx.controllers;
 import br.com.cinemafx.dbcontrollers.DBBoss;
 import br.com.cinemafx.dbcontrollers.DBFunctions;
 import br.com.cinemafx.dbcontrollers.DBObjects;
+import br.com.cinemafx.dbcontrollers.OpRelacional;
 import br.com.cinemafx.methods.Functions;
 import br.com.cinemafx.methods.MaskField;
 import br.com.cinemafx.models.*;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -333,9 +335,8 @@ public class FilmeCtrl implements Initializable, CadCtrlIntface {
                     try {
                         ArrayList<Integer> codFilmes = new ArrayList<>();
                         tbvFilmes.getSelectionModel().getSelectedItems().forEach(filme -> codFilmes.add(filme.getCodFilme()));
-                        int count = DBFunctions.checkIfExistsWithoutThrows(this.getClass(), "TSESSOES",
-                                new Pair<>("CODFILME", codFilmes.toArray()));
-                        if (count > 0)
+                        if (DBFunctions.checkIfExists(this.getClass(), "TSESSOES",
+                                new Pair(OpRelacional.EQUALS, new Pair("CODFILME", Arrays.asList(codFilmes)))) > 0)
                             throw new Exception("Existem sessões cadastradas para estes filmes\n" +
                                     "Caso seja necessário, exclua as sessões destes filmes e tente novamente.");
                         DBBoss.excluiFilme(this.getClass(), codFilmes);
