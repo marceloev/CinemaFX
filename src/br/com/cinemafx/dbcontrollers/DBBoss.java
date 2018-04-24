@@ -8,12 +8,13 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static br.com.cinemafx.dbcontrollers.DBFunctions.*;
 import static br.com.cinemafx.dbcontrollers.DBFunctions.getBooToString;
 
 public class DBBoss {
 
     public static int inseriUser(Class invocador, User user) throws Exception {
-        if (DBFunctions.checkIfExists1(invocador, "TUSU",
+        if (checkIfExists(invocador, "TUSU",
                 new Pair(OpRelacional.EQUALS, new Pair("LOGIN", Arrays.asList(user.getLoginUsu())))) > 0)
             throw new Exception("Já existe um usuário com este login");
         Conexao conex = new Conexao(invocador);
@@ -35,10 +36,9 @@ public class DBBoss {
     }
 
     public static void alteraUser(Class invocador, User user) throws Exception {
-        int count = DBFunctions.checkIfExists1(invocador, "TUSU",
-                new Pair(OpRelacional.EQUALS, new Pair[]{new Pair<>("REFSALA", user.getLoginUsu())}),
-                new Pair(OpRelacional.DIFFERENT, new Pair<>("CODUSU", user.getCodUsu())));
-        if (count > 0)
+        if (checkIfExists(invocador, "TUSU",
+                new Pair(OpRelacional.EQUALS, new Pair("LOGIN", Arrays.asList(user.getLoginUsu()))),
+                new Pair(OpRelacional.DIFFERENT, new Pair("CODUSU", Arrays.asList(user.getCodUsu())))) > 0)
             throw new Exception("Já existe um usuário com este login");
         Conexao conex = new Conexao(invocador);
         try {
@@ -72,9 +72,8 @@ public class DBBoss {
     }
 
     public static int inseriSala(Class invocador, Sala sala) throws Exception {
-        int count = DBFunctions.checkIfExistsWithoutThrows(invocador, "TSALAS",
-                new Pair[]{new Pair<>("REFSALA", sala.getRefSala())});
-        if (count > 0)
+        if (checkIfExists(invocador, "TSALAS",
+                new Pair(OpRelacional.EQUALS, new Pair("REFSALA", Arrays.asList(sala.getRefSala())))) > 0)
             throw new Exception("Já existe uma sala com esta referência");
         Conexao conex = new Conexao(invocador);
         try {
@@ -94,15 +93,10 @@ public class DBBoss {
     }
 
     public static void alteraSala(Class invocador, Sala sala) throws Exception {
-        int count = DBFunctions.checkIfExistsWithoutThrows(invocador, "TSALAS",
-                new Pair[]{new Pair<>("REFSALA", sala.getRefSala())});
-        if (count > 0)
+        if (checkIfExists(invocador, "TSALAS",
+                new Pair(OpRelacional.EQUALS, new Pair("REFSALA", Arrays.asList(sala.getRefSala()))),
+                new Pair(OpRelacional.DIFFERENT, new Pair("CODSALA", Arrays.asList(sala.getCodSala())))) > 0)
             throw new Exception("Já existe uma sala com esta referência");
-        /*ArrayList<Pair<String, Object>> filtros = new ArrayList();
-        filtros.add(new Pair<>("REFSALA =", sala.getRefSala()));
-        filtros.add(new Pair<>("CODSALA <>", sala.getCodSala()));
-        if (checkIfExists(invocador, "TSALAS", filtros) > 0)
-            throw new Exception("Já existe uma sala com esta referência");*/
         Conexao conex = new Conexao(invocador);
         try {
             conex.createStatement("UPDATE TSALAS\n" +
@@ -179,7 +173,7 @@ public class DBBoss {
     }
 
     public static Genero inseriGenero(Class invocador, Genero genero) throws Exception {
-        if (DBFunctions.checkIfExists(invocador, "TGENEROS",
+        if (checkIfExists(invocador, "TGENEROS",
                 new Pair(OpRelacional.EQUALS, new Pair("NOMEGENERO", genero.getNomeGenero()))) > 0)
             throw new Exception("Já existe um gênero com este nome");
         Conexao conex = new Conexao(invocador);

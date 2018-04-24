@@ -25,32 +25,7 @@ public class DBFunctions {
         }
     }
 
-    public static int checkIfExistsWithoutThrows(Class invocador, String nomeTabela, Pair<String, Object[]>... filtros) {
-        Conexao conex = new Conexao(invocador);
-        StringBuilder strBuilder = new StringBuilder();
-        int retorno = -1;
-        try {
-            strBuilder.append("SELECT COUNT(1) FROM " + nomeTabela);
-            strBuilder.append("\nWHERE 1 = 1");
-            for (Pair<String, Object[]> filtro : filtros)
-                strBuilder.append(String.format("\nAND %s IN (%s)", filtro.getKey(),
-                        Functions.paramBuilder(new ArrayList<>(Arrays.asList(filtro.getValue())))));
-            conex.createStatement(strBuilder.toString());
-            for (Pair<String, Object[]> filtro : filtros)
-                conex.addParametro(filtro.getValue());
-            conex.createSet();
-            conex.rs.next();
-            retorno = conex.rs.getInt(1);
-        } catch (Exception ex) {
-            new ModelException(invocador, "Erro ao tentar contar registros na Query: \n".concat(strBuilder.toString())
-                    .concat(ex.getMessage()), ex).getAlert().showAndWait();
-        } finally {
-            conex.desconecta();
-            return retorno;
-        }
-    }
-
-    public static int checkIfExists1(Class invocador, String nomeTabela, Pair<OpRelacional, Pair<String, List<Object>>>... filtros) {
+    public static int checkIfExists(Class invocador, String nomeTabela, Pair<OpRelacional, Pair<String, List<Object>>>... filtros) {
         Conexao conex = new Conexao(invocador);
         StringBuilder strBuilder = new StringBuilder();
         int retorno = -1;
@@ -73,45 +48,6 @@ public class DBFunctions {
         } finally {
             conex.desconecta();
             return retorno;
-        }
-    }
-
-    public static int checkIfExists(Class invocador, String nomeTabela, Pair<String, Object> filtro) throws Exception {
-        Conexao conex = new Conexao(invocador); //No Pair, a chave já tem que vir com o operador relacional Ex: Pair<>("CODSALA <>", 1)
-        try {
-            conex.createStatement(String.format("SELECT COUNT(1) FROM %s\n" +
-                    "WHERE 1 = 1\n" +
-                    "AND %s ?", nomeTabela, filtro.getKey()));
-            conex.addParametro(filtro.getValue());
-            conex.createSet();
-            conex.rs.next();
-            return conex.rs.getInt(1);
-        } catch (Exception ex) {
-            throw new Exception(ex);
-        } finally {
-            conex.desconecta();
-        }
-    }
-
-    public static int checkIfExists(Class invocador, String nomeTabela, ArrayList<Pair<String, Object>> filtros) throws Exception {
-        Conexao conex = new Conexao(invocador);
-        try {
-            StringBuilder strBuildFiltros = new StringBuilder();
-            ArrayList<Object> objFiltros = new ArrayList<>();
-            for (Pair<String, Object> filtro : filtros) {
-                objFiltros.add(filtro.getValue());
-                strBuildFiltros.append(String.format("\nAND %s ?", filtro.getKey()));
-            }
-            conex.createStatement(String.format("SELECT COUNT(1) FROM %s\n" +
-                    "WHERE 1 = 1 %s", nomeTabela, strBuildFiltros.toString()));
-            conex.addParametro(objFiltros);
-            conex.createSet();
-            conex.rs.next();
-            return conex.rs.getInt(1);
-        } catch (Exception ex) {
-            throw new Exception(ex);
-        } finally {
-            conex.desconecta();
         }
     }
 
