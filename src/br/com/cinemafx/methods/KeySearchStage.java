@@ -12,13 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static br.com.cinemafx.methods.Functions.Nvl;
+
 public class KeySearchStage<S> extends Stage {
 
     private String descrSearch;
@@ -40,6 +41,10 @@ public class KeySearchStage<S> extends Stage {
     private TableView<Object[]> tableView = new TableView<>();
     private List<Pair<String, TableColumnType>> colunas = new ArrayList<>();
     private List<Object> keyReturn = new ArrayList<>();
+    private String filter = "";
+    private Pair<ObservableList<String>, ObservableList<String>> filtros =
+            new Pair(FXCollections.observableArrayList(), FXCollections.observableArrayList());
+    private ObservableList<String> opRelacionais = FXCollections.observableArrayList();
 
     public KeySearchStage(String descrSearch, ImageView imgSearch, String query,
                           List<Pair<String, TableColumnType>> colunas) {
@@ -54,16 +59,38 @@ public class KeySearchStage<S> extends Stage {
         this.setTitle("Pesquisando: ".concat(descrSearch)); //Pesquisando : Salas
         this.setDescrSearch(descrSearch);
         this.setImgSearch(imgSearch);
-        this.setQuery(query);
+        if (query.contains("WHERE"))
+            this.setQuery(query);
+        else
+            this.setQuery(query + "\nWHERE 1 = 1");
         this.setColunas(colunas);
         estrutura();
         appCalls();
     }
 
     private void estrutura() {
+        opRelacionais.addAll(new String[]{"Igual á '='", "Diferente de '<>'", "Contendo 'LIKE'", "Não contendo 'NOT LIKE'"});
         StackPane pane = new StackPane();
         Scene root = new Scene(pane, 700, 600);
         this.setScene(root);
+        ComboBox<String> cbbValuesFiltro = new ComboBox<>();
+        cbbValuesFiltro.setItems(filtros.getValue());
+        cbbValuesFiltro.getSelectionModel().select(0);
+        cbbValuesFiltro.prefWidthProperty().bind(root.widthProperty().multiply(20).divide(100)); //20%
+        cbbValuesFiltro.getStylesheets().add("/br/com/cinemafx/methods/css/CenteredComboBox.css");
+        ComboBox<String> cbbOpRelFiltro = new ComboBox<>();
+        cbbOpRelFiltro.setItems(opRelacionais);
+        cbbOpRelFiltro.getSelectionModel().select(0);
+        cbbOpRelFiltro.prefWidthProperty().bind(root.widthProperty().multiply(20).divide(100)); //20%
+        cbbOpRelFiltro.getStylesheets().add("/br/com/cinemafx/methods/css/CenteredComboBox.css");
+        TextField txtFiltro = TextFieldBuilder.create()
+                .alignment(Pos.CENTER)
+                .onAction(e -> reloadTableValue())
+                .build();
+        txtFiltro.textProperty().addListener((obs, oldV, newV) -> filter = newV);
+        txtFiltro.prefWidthProperty().bind(root.widthProperty().multiply(60).divide(100)); //60%
+        HBox boxFiltro = new HBox(cbbValuesFiltro, cbbOpRelFiltro, txtFiltro);
+        boxFiltro.setSpacing(4);
         HBox boxButton = new HBox();
         Button[] buttons = new Button[2];
         buttons[0] = new Button("Sair");
@@ -85,14 +112,16 @@ public class KeySearchStage<S> extends Stage {
         getTableView().prefWidthProperty().bind(pane.widthProperty().subtract(25));
         getTableView().prefHeightProperty().bind(pane.heightProperty().subtract(25));
         getTableView().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        VBox box = new VBox(getTableView(), boxButton);
+        VBox box = new VBox(boxFiltro, getTableView(), boxButton);
         box.setSpacing(5);
         box.setPadding(new Insets(3, 3, 3, 3));
         pane.getChildren().add(box);
     }
 
     private void appCalls() {
-        this.getScene().setOnKeyReleased(e -> this.close()); //Não da trigger em nada
+        this.getScene().setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.ESCAPE) this.close();
+        }); //Não da trigger em nada
         this.tableView.setOnMouseClicked(e -> {
             if (e.getClickCount() > 1) {
                 if (tableView.getSelectionModel().getSelectedItem() == null) {
@@ -126,6 +155,10 @@ public class KeySearchStage<S> extends Stage {
             conex.createSet();
             int countRow = conex.countRows();
             int countCol = conex.rs.getMetaData().getColumnCount();
+            if (filtros.getKey().isEmpty())
+                for (int i = 1; countCol >= i; i++) {
+                    filtros.getKey().add(conex.rs.getMetaData().getColumnName(i));
+                }
             Object[][] DadosTabela = new Object[countRow][countCol];
             for (int rowAtual = 0; rowAtual < countRow; rowAtual++) {
                 conex.rs.next();
@@ -167,6 +200,7 @@ public class KeySearchStage<S> extends Stage {
         this.colunas = colunas;
         for (int i = 0; i < colunas.size(); i++) {
             int finalI = i;
+            filtros.getValue().add(colunas.get(i).getKey());
             TableColumn column = new ModelTableColumn<S, Object>(colunas.get(i).getKey(), null, colunas.get(i).getValue());
             column.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Object[], Object>, ObservableValue<Object>>)
                     p -> new SimpleObjectProperty<>((p.getValue()[finalI])));

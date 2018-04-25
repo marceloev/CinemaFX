@@ -63,65 +63,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Functions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/Functions.java">
+      <file leaf-file-name="KeySearchStage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/KeySearchStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1072">
-              <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBBoss.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBBoss.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+            <state relative-caret-position="155">
+              <caret line="153" column="46" selection-start-line="153" selection-start-column="46" selection-end-line="153" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2796#3305#0" />
+                <element signature="e#7605#7606#0" expanded="true" />
+                <element signature="e#7639#7640#0" expanded="true" />
+                <element signature="e#7693#7694#0" expanded="true" />
+                <element signature="e#7739#7740#0" expanded="true" />
+                <element signature="e#7778#7779#0" expanded="true" />
+                <element signature="e#7810#7811#0" expanded="true" />
+                <element signature="e#7863#7864#0" expanded="true" />
+                <element signature="e#7905#7906#0" expanded="true" />
+                <element signature="e#8662#8663#0" expanded="true" />
+                <element signature="e#8694#8695#0" expanded="true" />
+                <element signature="e#8726#8727#0" expanded="true" />
+                <element signature="e#8754#8755#0" expanded="true" />
+                <element signature="e#8796#8797#0" expanded="true" />
+                <element signature="e#8830#8831#0" expanded="true" />
+                <element signature="e#8893#8894#0" expanded="true" />
+                <element signature="e#8923#8924#0" expanded="true" />
+                <element signature="e#8965#8966#0" expanded="true" />
+                <element signature="e#8997#8998#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBFunctions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBFunctions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#checkIfExists#0;class#DBFunctions#0" />
-                <element signature="method#getUserParametro#0;class#DBFunctions#0" />
-                <element signature="method#getParametros#0;class#DBFunctions#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SessaoCtrl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/SessaoCtrl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FilmeCtrl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/FilmeCtrl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="338" column="27" selection-start-line="338" selection-start-column="27" selection-end-line="338" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExibicaoCtrl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/ExibicaoCtrl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="269" column="112" selection-start-line="269" selection-start-column="112" selection-end-line="269" selection-end-column="112" />
             </state>
           </provider>
         </entry>
@@ -129,8 +97,8 @@
       <file leaf-file-name="Conexao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/Conexao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2352">
-              <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
+            <state relative-caret-position="432">
+              <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -140,9 +108,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -216,24 +184,26 @@
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/models/Filme.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/methods/SearchFieldTable.java" />
         <option value="$APPLICATION_CONFIG_DIR$/idea64.exe.vmoptions" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/models/ModelTableColumn.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/methods/KeySearchStage.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/views/fxml/Login2.fxml" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/views/dialogs/ModelException.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/Main.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/AltSenhaDlg.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/SalaCtrl.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/SessaoCtrl.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/IngressoCtrl.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/LoginCtrl.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/OperadorRelacional.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/OpRelacional.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBBoss.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/methods/Functions.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/Conexao.java" />
-        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBFunctions.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/FilmeCtrl.java" />
         <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/ExibicaoCtrl.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/SalaCtrl.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBFunctions.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/teste.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/ListObject.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/controllers/SessaoCtrl.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/methods/Functions.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/models/ModelTableColumn.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/Conexao.java" />
+        <option value="$PROJECT_DIR$/src/br/com/cinemafx/methods/KeySearchStage.java" />
       </list>
     </option>
   </component>
@@ -509,7 +479,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.329582" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.329582" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -520,8 +490,8 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.52757794" visible="true" weight="0.24810892" />
-      <window_info id="Structure" order="1" sideWeight="0.47242206" side_tool="true" visible="true" weight="0.24810892" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5273312" visible="true" weight="0.24810892" />
+      <window_info id="Structure" order="1" sideWeight="0.4726688" side_tool="true" visible="true" weight="0.24810892" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="4" />
@@ -584,7 +554,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -592,8 +562,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/AutoriaDlg.java">
@@ -761,23 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/models/ModelTableColumn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/KeySearchStage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2224">
-          <caret line="179" column="5" selection-start-line="179" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2272">
@@ -813,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBObjects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="120" column="37" lean-forward="true" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/IngressoCtrl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -842,41 +786,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/FilmeCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="338" column="27" selection-start-line="338" selection-start-column="27" selection-end-line="338" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/SalaCtrl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="268" column="41" selection-start-line="268" selection-start-column="33" selection-end-line="268" selection-end-column="41" />
+        <state relative-caret-position="277">
+          <caret line="270" column="106" selection-start-line="270" selection-start-column="106" selection-end-line="270" selection-end-column="106" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBBoss.java">
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/ExibicaoCtrl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1072">
-          <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/Conexao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2352">
-          <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
+        <state relative-caret-position="253">
+          <caret line="269" column="112" selection-start-line="269" selection-start-column="112" selection-end-line="269" selection-end-column="112" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="224">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#checkIfExists#0;class#DBFunctions#0" />
@@ -886,24 +820,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/SessaoCtrl.java">
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/teste.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/ListObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
-          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="34" />
+          <folding>
+            <element signature="e#166#167#0" expanded="true" />
+            <element signature="e#185#186#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/FilmeCtrl.java">
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/SessaoCtrl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="338" column="27" selection-start-line="338" selection-start-column="27" selection-end-line="338" selection-end-column="27" />
+        <state relative-caret-position="251">
+          <caret line="248" column="17" lean-forward="true" selection-start-line="248" selection-start-column="17" selection-end-line="248" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/controllers/ExibicaoCtrl.java">
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBObjects.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="269" column="112" selection-start-line="269" selection-start-column="112" selection-end-line="269" selection-end-column="112" />
+        <state relative-caret-position="149">
+          <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/DBBoss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/models/ModelTableColumn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+          <folding>
+            <element signature="method#setCustomCellFactory#0;class#ModelTableColumn#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/dbcontrollers/Conexao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/com/cinemafx/methods/KeySearchStage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="153" column="46" selection-start-line="153" selection-start-column="46" selection-end-line="153" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2796#3305#0" />
+            <element signature="e#7605#7606#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
+            <element signature="e#7693#7694#0" expanded="true" />
+            <element signature="e#7739#7740#0" expanded="true" />
+            <element signature="e#7778#7779#0" expanded="true" />
+            <element signature="e#7810#7811#0" expanded="true" />
+            <element signature="e#7863#7864#0" expanded="true" />
+            <element signature="e#7905#7906#0" expanded="true" />
+            <element signature="e#8662#8663#0" expanded="true" />
+            <element signature="e#8694#8695#0" expanded="true" />
+            <element signature="e#8726#8727#0" expanded="true" />
+            <element signature="e#8754#8755#0" expanded="true" />
+            <element signature="e#8796#8797#0" expanded="true" />
+            <element signature="e#8830#8831#0" expanded="true" />
+            <element signature="e#8893#8894#0" expanded="true" />
+            <element signature="e#8923#8924#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

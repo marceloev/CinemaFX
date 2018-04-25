@@ -151,9 +151,4 @@ public class ModelTableColumn<S, T> extends TableColumn {
         Platform.runLater(() -> this.prefWidthProperty().bind(this.getTableView().widthProperty().multiply(percent).divide(100)));
         return this;
     }
-
-    public TableColumn setPercentSize(Integer percent) {
-        Platform.runLater(() -> this.prefWidthProperty().bind(this.getTableView().widthProperty().multiply(percent).divide(100)));
-        return this;
-    }
 }

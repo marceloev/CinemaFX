@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,6 @@ public class Functions {
 
     public static final Image noImageFilme = new Image("/br/com/cinemafx/views/images/Icon_Sem_Imagem.png");
     public static final SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    public static final DateTimeFormatter timeHoraformatter = DateTimeFormatter.ofPattern("HH:mm");
     public static final SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM");
 
     public static String getDataFormatted(SimpleDateFormat dataHoraFormater, Object value) {

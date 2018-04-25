@@ -190,8 +190,8 @@ public class SessaoCtrl implements Initializable, CadCtrlIntface {
         KeySearchStage<Sala> salaKeySearchStage = new KeySearchStage("Salas", imgBuscaSala,
                 "SELECT CODSALA, REFSALA, CAPACIDADE FROM TSALAS",
                 Arrays.asList(new Pair<>("Cód. Sala", TableColumnType.Inteiro),
-                        new Pair<>("Referência", TableColumnType.Texto_Pequeno),
-                        new Pair<>("Capacidade", TableColumnType.Inteiro)));
+                        new Pair("Referência", TableColumnType.Texto_Pequeno),
+                        new Pair("Capacidade", TableColumnType.Inteiro)));
         salaKeySearchStage.setOnCloseRequest(e -> {
             List<Object> retorno = salaKeySearchStage.getKeyReturn();
             if (!retorno.isEmpty()) {
@@ -250,11 +250,12 @@ public class SessaoCtrl implements Initializable, CadCtrlIntface {
             }
         });
         KeySearchStage<Filme> filmeKeySearchStage = new KeySearchStage("Filmes", imgBuscaFilme,
-                "SELECT CODFILME, NOMEFILME, MINFILME, SINOPSE FROM TFILMES",
+                "SELECT CODFILME, NOMEFILME, MINFILME, SINOPSE, IMAGEM FROM TFILMES",
                 Arrays.asList(new Pair<>("Cód. Filme", TableColumnType.Inteiro),
-                        new Pair<>("Nome", TableColumnType.Texto_Pequeno),
-                        new Pair<>("Duração", TableColumnType.Inteiro),
-                        new Pair<>("Sinopse", TableColumnType.Texto_Grande)));
+                        new Pair("Nome", TableColumnType.Texto_Pequeno),
+                        new Pair("Duração", TableColumnType.Inteiro),
+                        new Pair("Sinopse", TableColumnType.Texto_Grande),
+                        new Pair("Cartaz", TableColumnType.Imagem)));
         filmeKeySearchStage.setOnCloseRequest(e -> {
             List<Object> retorno = filmeKeySearchStage.getKeyReturn();
             if (!retorno.isEmpty()) {

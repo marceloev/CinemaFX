@@ -5,23 +5,17 @@ import br.com.cinemafx.models.ParametroType;
 import br.com.cinemafx.views.dialogs.ModelException;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DBFunctions {
 
     public static String getBooToString(boolean value, int lenght) {
         if (value) {
-            if (lenght == 1)
-                return "S";
-            else
-                return "Sim";
+            if (lenght == 1) return "S";
+            else return "Sim";
         } else {
-            if (lenght == 1)
-                return "N";
-            else
-                return "Não";
+            if (lenght == 1) return "N";
+            else return "Não";
         }
     }
 
